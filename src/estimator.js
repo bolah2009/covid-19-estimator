@@ -10,7 +10,8 @@
 //   timeToElapse: 58,
 //   reportedCases: 674,
 //   population: 66622705,
-//   t
+//   totalHospitalBeds: 1380614
+//  }
 
 import { generateImpactData } from './util/calculations';
 

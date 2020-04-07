@@ -16,7 +16,9 @@ export const getProjectedNumbersByPeriodType = (
 };
 
 export const generateImpactData = (
-  { reportedCases, timeToElapse, periodType },
+  {
+    reportedCases, timeToElapse, periodType, totalHospitalBeds
+  },
   type
 ) => {
   const determinant = type === 'severeImpact' ? 50 : 10;
@@ -27,11 +29,15 @@ export const generateImpactData = (
     timeToElapse,
     periodType
   );
+
   const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
+  const availableHospitalBeds = totalHospitalBeds * 0.35;
+  const hospitalBedsByRequestedTime = availableHospitalBeds - severeCasesByRequestedTime;
 
   return {
     currentlyInfected,
     infectionsByRequestedTime,
-    severeCasesByRequestedTime
+    severeCasesByRequestedTime,
+    hospitalBedsByRequestedTime
   };
 };
