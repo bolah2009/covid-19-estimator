@@ -1,0 +1,10 @@
+# Ignore generated directories.
+.*/
+
+#  Ignore coverage directory used by tools like istanbul
+coverage
+
+#  Ignore built directories
+dist
+build
+logs
