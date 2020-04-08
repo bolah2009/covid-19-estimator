@@ -1,0 +1,53 @@
+[class*='d-none'] {
+  display: none;
+}
+
+[class~='d-flex'] {
+  display: flex;
+}
+
+[class~='row'] {
+  flex-direction: row;
+}
+
+[class~='col'] {
+  flex-direction: column;
+}
+
+[class~='jc-sb'] {
+  justify-content: space-between;
+}
+
+[class~='jc-c'] {
+  justify-content: center;
+}
+
+[class~='jc-fe'] {
+  justify-content: flex-end;
+}
+
+[class~='ai-c'] {
+  align-items: center;
+}
+
+[class~='as-fe'] {
+  align-self: flex-end;
+}
+
+[class~='as-c'] {
+  align-self: center;
+}
+
+[class~='wrap'] {
+  flex-wrap: wrap;
+}
+
+@media (min-width: 780px) {
+  [class~='d-flex-md'] {
+    display: flex;
+  }
+
+  [class~='row-md'] {
+    flex-direction: row;
+  }
+}

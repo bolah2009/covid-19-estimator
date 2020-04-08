@@ -15,9 +15,9 @@
 
 import { generateImpactData } from './util/calculations';
 
-const covid19ImpactEstimator = (data) => {
+const covid19ImpactEstimator = data => {
   const result = {
-    data: {},
+    data,
     impact: { ...generateImpactData(data, 'impact') },
     severeImpact: {
       ...generateImpactData(data, 'severeImpact')

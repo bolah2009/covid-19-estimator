@@ -21,29 +21,32 @@ export const getProjectedNumbersByPeriodType = (
 };
 
 const getPercentage = (number, percent) => {
-  const bigNumber = new Big(number);
-  const percentage = bigNumber.div(100).times(percent);
-  return Number(percentage);
+  let result;
+  try {
+    const bigNumber = new Big(number);
+    const percentage = bigNumber.div(100).times(percent);
+    result = Number(percentage);
+  } catch (e) {
+    result = 0;
+  }
+  return result;
 };
 
-export const generateImpactData = (
-  data,
-  type
-) => {
+export const generateImpactData = (data, type) => {
   const {
     reportedCases,
     timeToElapse,
     periodType,
     totalHospitalBeds,
-    region: {
-      avgDailyIncomeInUSD,
-      avgDailyIncomePopulation
-    }
+    region: { avgDailyIncomeInUSD, avgDailyIncomePopulation }
   } = data;
   const determinant = type === 'severeImpact' ? 50 : 10;
 
   const currentlyInfected = reportedCases * determinant;
-  const { infectionsByRequestedTime, periodInDays } = getProjectedNumbersByPeriodType(
+  const {
+    infectionsByRequestedTime,
+    periodInDays
+  } = getProjectedNumbersByPeriodType(
     currentlyInfected,
     timeToElapse,
     periodType
@@ -51,10 +54,18 @@ export const generateImpactData = (
 
   const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
   const availableHospitalBeds = totalHospitalBeds * 0.35;
-  const hospitalBedsByRequestedTime = availableHospitalBeds - severeCasesByRequestedTime;
-  const casesForICUByRequestedTime = getPercentage(infectionsByRequestedTime, 5);
-  const casesForVentilatorsByRequestedTime = getPercentage(infectionsByRequestedTime, 2);
-  const dollarsInFlightFactor = periodInDays * avgDailyIncomeInUSD * avgDailyIncomePopulation;
+  const hospitalBedsByRequestedTime =
+    availableHospitalBeds - severeCasesByRequestedTime;
+  const casesForICUByRequestedTime = getPercentage(
+    infectionsByRequestedTime,
+    5
+  );
+  const casesForVentilatorsByRequestedTime = getPercentage(
+    infectionsByRequestedTime,
+    2
+  );
+  const dollarsInFlightFactor =
+    periodInDays * avgDailyIncomeInUSD * avgDailyIncomePopulation;
   const dollarsInFlight = infectionsByRequestedTime * dollarsInFlightFactor;
 
   return {

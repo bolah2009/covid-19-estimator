@@ -5,19 +5,19 @@ module.exports = {
     node: true,
     jest: true
   },
-  extends: [
-    'airbnb-base',
-  ],
+  extends: ['airbnb-base', 'prettier'],
   globals: {
     Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
+    SharedArrayBuffer: 'readonly'
   },
   parserOptions: {
     ecmaVersion: 2018,
-    sourceType: 'module',
+    sourceType: 'module'
   },
+  plugins: ['prettier'],
   rules: {
-    "comma-dangle": ["error", "never"],
-    "no-param-reassign": ["error", { "props": false }]
-  },
+    'comma-dangle': ['error', 'never'],
+    'no-param-reassign': ['error', { props: false }],
+    'prettier/prettier': 'error'
+  }
 };
