@@ -1,4 +1,4 @@
-import { generateImpactData } from './util/calculations';
+import generateImpactData from './util/calculations';
 
 const covid19ImpactEstimator = data => {
   const result = {

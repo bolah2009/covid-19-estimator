@@ -174,7 +174,7 @@ jobs:
       uses: ./.github/actions/props-out
     
     - name: Run Audits
-      run: npx lhci autorun --collect.url=${{ steps.props.outputs.frontend }} --config=./audits/lighthouserc.json
+      run: npx lhci autorun --collect.url=${{ steps.props.outputs.frontend }} --config=./lighthouserc.json
     
     - name: Report Audits
       uses: ./.github/actions/lhr-out

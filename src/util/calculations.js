@@ -1,6 +1,4 @@
-import Big from 'big.js';
-
-export const getProjectedNumbersByPeriodType = (
+const getProjectedNumbersByPeriodType = (
   currentlyInfected,
   timeToElapse,
   periodType
@@ -20,19 +18,11 @@ export const getProjectedNumbersByPeriodType = (
   return { infectionsByRequestedTime, periodInDays };
 };
 
-const getPercentage = (number, percent) => {
-  let result;
-  try {
-    const bigNumber = new Big(number);
-    const percentage = bigNumber.div(100).times(percent);
-    result = Number(percentage);
-  } catch (e) {
-    result = 0;
-  }
-  return result;
+const toFinancial = number => {
+  return Number(number.toFixed(2));
 };
 
-export const generateImpactData = (data, type) => {
+const generateImpactData = (data, type) => {
   const {
     reportedCases,
     timeToElapse,
@@ -40,6 +30,7 @@ export const generateImpactData = (data, type) => {
     totalHospitalBeds,
     region: { avgDailyIncomeInUSD, avgDailyIncomePopulation }
   } = data;
+
   const determinant = type === 'severeImpact' ? 50 : 10;
 
   const currentlyInfected = reportedCases * determinant;
@@ -52,29 +43,34 @@ export const generateImpactData = (data, type) => {
     periodType
   );
 
-  const severeCasesByRequestedTime = infectionsByRequestedTime * 0.15;
-  const availableHospitalBeds = totalHospitalBeds * 0.35;
+  const severeCasesByRequestedTime = infectionsByRequestedTime * 15 * 0.01;
+
+  const availableHospitalBeds = totalHospitalBeds * 35 * 0.01;
+
   const hospitalBedsByRequestedTime =
     availableHospitalBeds - severeCasesByRequestedTime;
-  const casesForICUByRequestedTime = getPercentage(
-    infectionsByRequestedTime,
-    5
-  );
-  const casesForVentilatorsByRequestedTime = getPercentage(
-    infectionsByRequestedTime,
-    2
-  );
+
+  const casesForICUByRequestedTime = infectionsByRequestedTime * 5 * 0.01;
+
+  const casesForVentilatorsByRequestedTime =
+    infectionsByRequestedTime * 2 * 0.01;
   const dollarsInFlightFactor =
     periodInDays * avgDailyIncomeInUSD * avgDailyIncomePopulation;
-  const dollarsInFlight = infectionsByRequestedTime * dollarsInFlightFactor;
+  const dollarsInFlight = toFinancial(
+    infectionsByRequestedTime * dollarsInFlightFactor
+  );
 
   return {
     currentlyInfected,
     infectionsByRequestedTime,
-    severeCasesByRequestedTime,
-    hospitalBedsByRequestedTime,
-    casesForICUByRequestedTime,
-    casesForVentilatorsByRequestedTime,
+    severeCasesByRequestedTime: Math.trunc(severeCasesByRequestedTime),
+    hospitalBedsByRequestedTime: Math.trunc(hospitalBedsByRequestedTime),
+    casesForICUByRequestedTime: Math.trunc(casesForICUByRequestedTime),
+    casesForVentilatorsByRequestedTime: Math.trunc(
+      casesForVentilatorsByRequestedTime
+    ),
     dollarsInFlight
   };
 };
+
+export default generateImpactData;
