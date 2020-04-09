@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="A COVID-19 infections impact estimator for #BuildForSDG Cohort1 Assessment."
+    />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="apple-touch-icon" sizes="60x60" href="/apple-icon-60x60.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-icon-76x76.png" />
+    <link
+      rel="apple-touch-icon"
+      sizes="114x114"
+      href="/apple-icon-114x114.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="120x120"
+      href="/apple-icon-120x120.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="144x144"
+      href="/apple-icon-144x144.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="152x152"
+      href="/apple-icon-152x152.png"
+    />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/apple-icon-180x180.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="192x192"
+      href="/android-icon-192x192.png"
+    />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <meta name="msapplication-TileColor" content="#ffffff" />
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <meta property="og:site_name" content="https://bolabuari.com" />
+    <meta property="og:title" content="COVID 19 Estimator" />
+    <meta
+      property="og:description"
+      content="A COVID-19 infections impact estimator for #BuildForSDG Cohort1 Assessment."
+    />
+    <meta property="og:image" content="/android-icon-192x192.png" />
+    <meta
+      property="og:url"
+      content="https://bolabuari.com/covid-19-estimator/"
+    />
+    <meta property="og:type" content="blog" />
+    <title>COVID 19 Estimator</title>
+  </head>
+  <body>
+    <main class="content d-flex col ai-c jc-c">
+      <h1 class="main title">COVID 19 Estimator</h1>
+      <div class="container d-flex col row-md jc-sb">
+        <form action="#" class="form" id="form">
+          <h2 class="title">
+            Enter Data:
+          </h2>
+
+          <div class="error d-none">
+            <p>Please, enter valid details.</p>
+            <p>Inputs with red outline and red background color are invalid</p>
+          </div>
+          <div class="input d-flex col jc-c">
+            <label class="label" for="region">
+              Region
+            </label>
+            <input
+              class="data"
+              type="text"
+              name="region"
+              id="region"
+              value="Africa"
+              data-region
+              minlength="1"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="avgDailyIncomeInUSD">
+              Average Daily Income In USD
+            </label>
+            <input
+              class="data"
+              type="number"
+              name="avgDailyIncomeInUSD"
+              id="avgDailyIncomeInUSD"
+              data-avg-daily-income-in-USD
+              step="0.01"
+              value="5"
+              min="0"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="avgDailyIncomePopulation">
+              Average Daily Income In Population
+            </label>
+            <input
+              class="data"
+              type="number"
+              name="avgDailyIncomePopulation"
+              id="avgDailyIncomePopulation"
+              step="0.01"
+              value="0.71"
+              data-avg-daily-income-population
+              min="0"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="population">
+              Population
+            </label>
+            <input
+              class="data"
+              type="number"
+              name="population"
+              id="population"
+              data-population
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="timeToElapse">
+              Time To Elapse
+            </label>
+            <input
+              class="data"
+              type="number"
+              name="timeToElapse"
+              id="timeToElapse"
+              data-time-to-elapse
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="reportedCases">
+              Reported Cases
+            </label>
+            <input
+              class="data"
+              type="number"
+              name="reportedCases"
+              id="reportedCases"
+              data-reported-cases
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="totalHospitalBeds">
+              Total Hospital Beds
+            </label>
+            <input
+              class="data"
+              type="number"
+              name="totalHospitalBeds"
+              id="totalHospitalBeds"
+              data-total-hospital-beds
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <label class="label" for="periodType">
+              Period Type
+            </label>
+            <select
+              data-period-type
+              id="periodType"
+              class="data"
+              name="periodType"
+              required
+            >
+              <option value="days">Days</option>
+              <option value="weeks">Weeks</option>
+              <option value="months">Months</option>
+            </select>
+          </div>
+
+          <div class="input d-flex col jc-c">
+            <button class="button" data-go-estimate type="submit" id="submit">
+              Estimate
+            </button>
+          </div>
+        </form>
+
+        <section class="result">
+          <h2 class="title">Estimated result</h2>
+          <p id="result-status">
+            No data to display, click on the Estimate button to generate data
+          </p>
+          <table id="inputted-data">
+            <caption>
+              Inputted Data
+            </caption>
+            <thead>
+              <th>Data</th>
+              <th>Value</th>
+            </thead>
+            <tbody>
+              <tr id="regionRow">
+                <td>Currently Infected</td>
+                <td></td>
+              </tr>
+              <tr id="avgDailyIncomeInUSDRow">
+                <td>Average Daily Income In USD</td>
+                <td></td>
+              </tr>
+              <tr id="avgDailyIncomePopulationRow">
+                <td>Average Daily Income Population</td>
+                <td></td>
+              </tr>
+              <tr id="periodTypeRow">
+                <td>Period Type</td>
+                <td></td>
+              </tr>
+              <tr id="timeToElapseRow">
+                <td>Time To Elapse</td>
+                <td></td>
+              </tr>
+              <tr id="reportedCasesRow">
+                <td>Reported Cases</td>
+                <td></td>
+              </tr>
+              <tr id="populationRow">
+                <td>Population</td>
+                <td></td>
+              </tr>
+              <tr id="totalHospitalBedsRow">
+                <td>Total Hospital Beds</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <table id="estimated-data">
+            <caption>
+              Estimated Data
+            </caption>
+            <thead>
+              <th>Data</th>
+              <th>Impact</th>
+              <th>Severe Impact</th>
+            </thead>
+            <tbody>
+              <tr id="currentlyInfected">
+                <td>Currently Infected</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr id="infectionsByRequestedTime">
+                <td>Infections By Requested Time</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr id="severeCasesByRequestedTime">
+                <td>Severe Cases By Requested Time</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr id="hospitalBedsByRequestedTime">
+                <td>Hospital Beds By Requested Time</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr id="casesForICUByRequestedTime">
+                <td>Cases For ICU By Requested Time</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr id="casesForVentilatorsByRequestedTime">
+                <td>Cases For Ventilators By Requested Time</td>
+                <td></td>
+                <td></td>
+              </tr>
+              <tr id="dollarsInFlight">
+                <td>Dollars In Flight</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>
