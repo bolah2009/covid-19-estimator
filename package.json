@@ -29,7 +29,7 @@
     "big.js": "^5.2.2"
   },
   "devDependencies": {
-    "@actions/core": "^1.2.3",
+    "@actions/core": "^1.2.6",
     "@actions/github": "^2.1.1",
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
