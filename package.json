@@ -34,7 +34,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@lhci/cli": "0.3.x",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-jest": "^25.2.6",
     "copy-webpack-plugin": "^5.0.5",
     "css-loader": "^3.2.0",
